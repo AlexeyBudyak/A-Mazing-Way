@@ -4,12 +4,12 @@ import React from 'react';
 function Language(props) {
   return (
     <div>
-        Language
+        Language &nbsp;
        <select>
-       <option value='Option 1' selected >Option 1</option>
-       <option value='Option 2' selected >Option 2</option>
-       <option value='Option 3' selected >Option 3</option>
-       <option value='Option 4' selected >Option 4</option>
+       <option value='English' selected >English</option>
+       <option value='Russian' selected >Russian</option>
+       <option value='Ukrainian' selected >Ukrainian</option>
+
 
       </select>
     </div>
