@@ -4,7 +4,7 @@ import QCount from "./QCount";
 
 
 function Title(props) {
-  const {lg, setLg} = props;
+  const {lg, setLg, QA} = props;
   return (
     <div className="alert alert-primary" role="alert">
 
@@ -20,7 +20,7 @@ function Title(props) {
           </div>
 
           <div className="col">
-            <QCount lg = {lg}/>
+            <QCount lg = {lg} QA = {QA}/>
           </div>
         </div>
       </div>
