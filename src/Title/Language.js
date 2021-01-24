@@ -2,6 +2,7 @@ import React from 'react';
 
 
 function Language(props) {
+  const lgTitles = ['English', 'Russian', 'Ukrainian'];
   return (
     <div>
         Language &nbsp;
