@@ -1,11 +1,13 @@
 import React from 'react';
+import Language from "./Language";
 
 
 function Title(props) {
   return (
     <div>
       <div className="alert alert-primary" role="alert">
-        A simple primary alert—check it out!
+        Title
+        <Language/>
       </div>
     </div>
   );
