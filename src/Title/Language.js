@@ -5,7 +5,7 @@ function Language(props) {
   const lgTitles = ['English', 'Russian', 'Ukrainian'];
 
     function lgHandler() {
-      //setLg(1);
+      // setLg(1);
   }
   return (
     <div>

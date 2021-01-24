@@ -8,7 +8,7 @@ function App() {
   const [lg,setLg] = useState(0);
   return (
     <div>
-      <Title lg = {lg} lgSet = {setLg}/>
+      <Title lg = {lg} setLg = {setLg}/>
       {QA[0][0][0].Q}
     </div>
   );
