@@ -9,7 +9,7 @@ function Title(props) {
       <div className="container">
         <div className="row align-items-start">
           <div className="col">
-            A Mazing Way
+            <h1>A Mazing Way</h1>
           </div>
           <div className="col">
 
