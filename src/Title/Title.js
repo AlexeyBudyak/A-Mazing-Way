@@ -4,6 +4,7 @@ import QCount from "./QCount";
 
 
 function Title(props) {
+  const {lg, setLg} = props;
   return (
     <div className="alert alert-primary" role="alert">
 
@@ -14,12 +15,12 @@ function Title(props) {
           </div>
           <div className="col">
 
-            <Language lg = {props.lg}/>
+            <Language lg = {lg} setLg = {setLg}/>
 
           </div>
 
           <div className="col">
-            <QCount/>
+            <QCount lg = {lg}/>
           </div>
         </div>
       </div>
