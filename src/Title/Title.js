@@ -1,5 +1,6 @@
 import React from 'react';
 import Language from "./Language";
+import QCount from "./QCount";
 
 
 function Title(props) {
@@ -18,7 +19,7 @@ function Title(props) {
           </div>
 
           <div className="col">
-            Count
+            <QCount/>
           </div>
         </div>
       </div>
