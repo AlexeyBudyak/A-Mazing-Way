@@ -13,7 +13,7 @@ function Title(props) {
           </div>
           <div className="col">
 
-            <Language/>
+            <Language lg = {props.lg}/>
 
           </div>
 

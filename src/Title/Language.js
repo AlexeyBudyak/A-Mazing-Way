@@ -7,12 +7,11 @@ function Language(props) {
     <div>
         Language &nbsp;
        <select>
-       <option value='English' selected >English</option>
-       <option value='Russian' selected >Russian</option>
-       <option value='Ukrainian' selected >Ukrainian</option>
 
-
+         {lgTitles.map((el,i) => i === props.lg ? <option value={el} key={el} selected >{el}</option>
+                                                                : <option value={el} key={el}>{el}</option>)}
       </select>
+      {props.lg}
     </div>
   );
 }
