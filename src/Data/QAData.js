@@ -1,4 +1,4 @@
-const initialData = () => {
+const QAData = () => {
     const QA =  [[[{Q: 'Title 1'},
                    {Q: 'Title 2'},
                    {Q: 'Title 3'}],
@@ -31,4 +31,4 @@ const initialData = () => {
                 [[],[]]];
     return QA;
 }
-export default initialData;
+export default QAData;

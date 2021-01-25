@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import Title from "./Title/Title";
-import initialData from "./InitialData/InitialData.js";
+import QAData from "./Data/QAData.js";
 
 
 function App() {
-  const QA = initialData();
+  const QA = QAData();
   const [lg,setLg] = useState(0);
   return (
     <div>
-      <Title lg = {lg} setLg = {setLg} QA = {QA}/>
+      <Title lg = {lg} setLg = {setLg} />
       {QA[0][0][0].Q}
     </div>
   );
