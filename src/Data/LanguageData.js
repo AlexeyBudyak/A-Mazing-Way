@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function LanguageData() {
+function lgData(lg = 0) {
   const captions = [
     {   //  English
         Questions: 'Questions',
@@ -15,7 +15,7 @@ function LanguageData() {
         Questions: 'Питання',
         HardestLevel: 'Максимальна складнiсть',
   }]
-  return captions;
+  return captions[lg];
 }
 
-export default LanguageData;
+export default lgData;

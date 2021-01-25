@@ -1,4 +1,4 @@
-const QAData = () => {
+const QAData = (lg = 0) => {
     const QA =  [[[{Q: 'Title 1'},
                    {Q: 'Title 2'},
                    {Q: 'Title 3'}],
@@ -29,6 +29,6 @@ const QAData = () => {
 
 
                 [[],[]]];
-    return QA;
+    return QA[lg];
 }
 export default QAData;
