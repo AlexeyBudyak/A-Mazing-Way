@@ -1,15 +1,16 @@
 #gField {
   border: 0px;
-  font-size: 12px;
-  background-color:DodgerBlue;
-  color:white;
+  font-size: 10px;
+  text-align: center;
 }
 #gPix{
-  width: 24px;
+  width: 20px;
+  height: 20px;
   color:yellow;
+  background-color:DodgerBlue;
 }
 #gClear{
   width: 24px;
   color: black;
-  background-color:DodgerBlue;
+  background-color:White;
 }
