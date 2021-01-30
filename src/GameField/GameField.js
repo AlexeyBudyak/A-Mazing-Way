@@ -1,29 +1,19 @@
 import React from 'react';
 import IconSquareFill from "../Icons/IconSquareFill";
+import "../CSS/gameField.css";
 
 
 function GameField(props) {
-  const blockLine = Array(60).fill(<td><IconSquareFill/></td>);
+  //
+  const blockLine = Array(42).fill(<td id='gPix'>*</td>);
+  const blockBar = Array(28).fill(<tr>{blockLine}</tr>);
 
   return (
-    <div>
-      <table >
-
+    <div >
+      <table id = 'gField'>
         <tbody>
-        <tr>{blockLine}</tr>
-        <tr>{blockLine}</tr>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-        </tr>
+
+          {blockBar}
 
         </tbody>
       </table>
