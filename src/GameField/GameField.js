@@ -7,7 +7,10 @@ function GameField(props) {
   //
   const blockLine = Array(42).fill(<td id='gPix'>*</td>);
   const blockBar = Array(28).fill(<tr>{blockLine}</tr>);
-
+  for(let i = 1; i < 27; i++){
+    let newLine = Array(42).fill(<td id='gPix'>*</td>);
+    blockBar[i] = <tr>{newLine}</tr>;
+  }
   return (
     <div >
       <table id = 'gField'>
