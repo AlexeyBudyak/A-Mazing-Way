@@ -7,7 +7,9 @@ function App() {
   return (
     <div>
       <Title lg = {lg} setLg = {setLg} />
+
       <div className="container">
+
         <GameField/>
       </div>
 

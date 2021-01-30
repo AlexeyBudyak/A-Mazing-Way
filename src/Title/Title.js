@@ -15,11 +15,12 @@ function Title(props) {
           </div>
           <div className="col">
 
-            <Language lg = {lg} setLg = {setLg}/>
+            <button type="button" className="btn btn-primary">Start</button>
 
           </div>
 
           <div className="col">
+            <Language lg = {lg} setLg = {setLg}/>
             <QCount lg = {lg} />
           </div>
         </div>
