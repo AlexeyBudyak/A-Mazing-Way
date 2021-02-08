@@ -14,3 +14,13 @@
   color: black;
   background-color:White;
 }
+#gStart{
+  width: 24px;
+  color: black;
+  background-color: Aquamarine;
+}
+#gEnd{
+  width: 24px;
+  color: black;
+  background-color:LightGreen;
+}
