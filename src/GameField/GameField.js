@@ -2,25 +2,39 @@ import React from 'react';
 import IconSquareFill from "../Icons/IconSquareFill";
 import "../CSS/gameField.css";
 import mazeData from "../Data/MazaData";
-function setTrack(maze, x1, y1, x2, y2, n = 0){
+function setTrack(maz, x1, y1, x2, y2, n = 0, track = ''){
   let path = [];
-  if(n) maze[y1][x1] = '*';
+  let mazeT = [...maz];
+  if(n) mazeT[y1][x1] = '*';
   if((Math.abs(x2 - x1) === 1 && y1 === y2) ||
      (Math.abs(y2 - y1) === 1 && x1 === x2))
-        return [maze, n];
-  if(y1 && maze[y1 - 1][x1] === '0') path.push(setTrack(maze,x1, y1 - 1, x2, y2, n + 1));
-  if(y1 < 25 && maze[y1 + 1][x1] === '0') path.push(setTrack(maze,x1, y1 + 1, x2, y2, n + 1));
-  if(x1 && maze[y1][x1 - 1] === '0') path.push(setTrack(maze,x1 - 1, y1, x2, y2, n + 1));
-  if(x1 < 39 && maze[y1][x1 + 1] === '0') path.push(setTrack(maze,x1 + 1, y1, x2, y2, n + 1));
-  if(!path.length)  return [maze, 1000];
+        return [[...mazeT], n, track];
+  if(y1 && mazeT[y1 - 1][x1] === '0') path.push(setTrack([...mazeT],x1, y1 - 1, x2, y2, n + 1, track + 'N'));
+  if(y1 < 25 && mazeT[y1 + 1][x1] === '0') path.push(setTrack([...mazeT],x1, y1 + 1, x2, y2, n + 1, track + 'S'));
+  if(x1 && mazeT[y1][x1 - 1] === '0') path.push(setTrack([...mazeT],x1 - 1, y1, x2, y2, n + 1, track + 'W'));
+  if(x1 < 39 && mazeT[y1][x1 + 1] === '0') path.push(setTrack([...mazeT],x1 + 1, y1, x2, y2, n + 1, track + 'E'));
+  if(!path.length)  return [[...mazeT], 1000, ''];
   if(path.length === 1) return path[0];
   return path.sort((a,b)=>(a[1] - b[1]))[0];
 }
 
 function blockHandler(maze,setMaze, player, x2, y2){
-  const maze2D = maze.map(el=>el.split(''));
-  setTrack(maze2D, player.x, player.y, x2, y2);
-  setMaze(maze.map(line => line.split('').map((el,i)=> (i > 35 && el==0) ? '*'  : el).join('')));
+  let x = player.x;
+  let y = player.y;
+  let maze2D = maze.map(el=>el.split(''));
+  const path = setTrack([...maze2D], player.x, player.y, x2, y2);
+  maze2D = maze.map(el=>el.split(''));
+  console.log(path[1],path[2]);
+  for(let i = 0; i < path[2].length; i++){
+    switch(path[2][i]){
+      case 'N': y--;  break;
+      case 'S': y++;  break;
+      case 'W': x--;  break;
+      case 'E': x++;  break;
+    }
+    maze2D[y][x] = '*';
+  }
+  setMaze(maze2D.map(el=>el.join('')));
 }
 function blockOutHandler(maze,setMaze){
   setMaze(maze.map(line => line.replace(/[*]/g,'0')));
