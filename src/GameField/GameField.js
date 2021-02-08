@@ -27,6 +27,7 @@ function GameField(props) {
             else  if(j === 39)  tdId = 'gEnd';
                         else    tdId = 'gClear';
           space = maze[i - 1][j] === '0' ? '' : '*';
+          if(player.x === j && player.y === i - 1)  space = player.skin;
 
           newLine[j + 1] = <td id={tdId} onMouseOver={()=>blockHandler(maze, setMaze)}
                                onMouseOut={()=>blockOutHandler(maze, setMaze)}>

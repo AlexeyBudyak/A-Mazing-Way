@@ -1,6 +1,6 @@
 #gField {
   border: 0px;
-  font-size: 10px;
+  font-size: 18px;
   text-align: center;
 }
 #gPix{
@@ -13,14 +13,17 @@
   width: 24px;
   color: black;
   background-color:White;
+  font-size: 12px;
 }
 #gStart{
   width: 24px;
   color: black;
   background-color: Aquamarine;
+  font-size: 12px;
 }
 #gEnd{
   width: 24px;
   color: black;
   background-color:LightGreen;
+  font-size: 12px;
 }
