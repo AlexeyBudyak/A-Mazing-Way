@@ -11,25 +11,27 @@ function blockOutHandler(maze,setMaze){
 }
 
 function GameField(props) {
-  const {maze, setMaze} = props;
+  const {maze, setMaze, player, setPlayer} = props;
   const blockLine = Array(42).fill(<td id='gPix'> </td>);
   const blockBar = Array(28).fill(<tr>{blockLine}</tr>);
   let tdId;
+  let space;
 
   for(let i = 1; i < 27; i++){
     let newLine = Array(42).fill(<td id='gPix'> </td>);
 
     //newLine[1] = <td id='gStart'>.</td>;
     for(let j = 0; j < 40; j++){
-      if( i <= maze.length && (maze[i - 1][j] === '0' || maze[i - 1][j] === '*')) {
+      if( i <= maze.length && '*0'.includes(maze[i - 1][j])) {
         if(j===0) tdId = 'gStart';
             else  if(j === 39)  tdId = 'gEnd';
                         else    tdId = 'gClear';
+          space = maze[i - 1][j] === '0' ? '' : '*';
 
           newLine[j + 1] = <td id={tdId} onMouseOver={()=>blockHandler(maze, setMaze)}
-                               onMouseOut={()=>blockOutHandler(maze, setMaze)}
-                                 >
-                   {maze[i - 1][j] === '0' ? '' : '*'}</td>;
+                               onMouseOut={()=>blockOutHandler(maze, setMaze)}>
+                              {space}
+                           </td>;
 
 
       }
