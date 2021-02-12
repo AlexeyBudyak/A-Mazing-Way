@@ -1,21 +1,6 @@
 import React from 'react';
 import IconSquareFill from "../Icons/IconSquareFill";
 import "../CSS/gameField.css";
-import mazeData from "../Data/MazaData";
-
-function trackValidator(track){
-  let x = 0, y = 0;
-  for(let i = 0; i < track.length; i++){
-     switch(track[i]){
-      case 'N': y--;  break;
-      case 'S': y++;  break;
-      case 'W': x--;  break;
-      case 'E': x++;  break;
-    }
-    if(!x && !y)  return false;
-  }
-  return true;
-}
 
 function pathCheck(maze, path, xBegin, yBegin){
   let x = xBegin;
