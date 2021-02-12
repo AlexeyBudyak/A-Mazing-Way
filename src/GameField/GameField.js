@@ -2,31 +2,108 @@ import React from 'react';
 import IconSquareFill from "../Icons/IconSquareFill";
 import "../CSS/gameField.css";
 import mazeData from "../Data/MazaData";
-function setTrack(maz, x1, y1, x2, y2, n = 0, track = ''){
-  let path = [];
-  let mazeT = [...maz];
-  if(n) mazeT[y1][x1] = '*';
-  if((Math.abs(x2 - x1) === 1 && y1 === y2) ||
-     (Math.abs(y2 - y1) === 1 && x1 === x2))
-        return [[...mazeT], n, track];
-  if(y1 && mazeT[y1 - 1][x1] === '0') path.push(setTrack([...mazeT],x1, y1 - 1, x2, y2, n + 1, track + 'N'));
-  if(y1 < 25 && mazeT[y1 + 1][x1] === '0') path.push(setTrack([...mazeT],x1, y1 + 1, x2, y2, n + 1, track + 'S'));
-  if(x1 && mazeT[y1][x1 - 1] === '0') path.push(setTrack([...mazeT],x1 - 1, y1, x2, y2, n + 1, track + 'W'));
-  if(x1 < 39 && mazeT[y1][x1 + 1] === '0') path.push(setTrack([...mazeT],x1 + 1, y1, x2, y2, n + 1, track + 'E'));
-  if(!path.length)  return [[...mazeT], 1000, ''];
-  if(path.length === 1) return path[0];
-  return path.sort((a,b)=>(a[1] - b[1]))[0];
+
+function trackValidator(track){
+  let x = 0, y = 0;
+  for(let i = 0; i < track.length; i++){
+     switch(track[i]){
+      case 'N': y--;  break;
+      case 'S': y++;  break;
+      case 'W': x--;  break;
+      case 'E': x++;  break;
+    }
+    if(!x && !y)  return false;
+  }
+  return true;
+}
+
+function pathCheck(maze, path, xBegin, yBegin){
+  let x = xBegin;
+  let y = yBegin;
+  let trace = [];
+  for(let i = 0; i < path.length; i++){
+    trace.push(x + ':' + y);
+     switch(path[i]){
+      case 'N': y--;  break;
+      case 'S': y++;  break;
+      case 'W': x--;  break;
+      case 'E': x++;  break;
+    }
+
+    if(trace.includes(x + ':' + y) ||  x < 0 || y < 0 || x > 39 || y > 25 ||
+      (maze[y][x]!=='0' && maze[y][x]!=='+')) return false;
+  }
+  if(maze[y][x]==='+')  {console.log('track-filter'); return false;}
+  maze[y][x] = '+';
+  return true;
+}
+
+function finishCheck(x1, y1, x2, y2, path){
+  for(let i = 0; i < path.length; i++){
+     switch(path[i]){
+      case 'N': y1--;  break;
+      case 'S': y1++;  break;
+      case 'W': x1--;  break;
+      case 'E': x1++;  break;
+    }
+  }
+  return (x1 === x2 && y1 === y2);
+}
+
+function setTrack(maze, x1, y1, x2, y2){
+  let tracks = [''];
+  const d = ['N','S','W','E'];
+  let tracksInfo = [];
+
+  for(let i = 0; i < 100 && tracks.length; i++){
+      tracks = Array(tracks.length * 4).fill('')
+            .map((_,i)=>tracks[~~(i/4)]+d[i%4]);
+
+     console.log('Before filter: ',tracks);
+
+      tracks = tracks.filter(path => pathCheck(maze, path, x1, y1));
+
+      console.log('After 1st filter: ',tracks);
+
+     //  tracksInfo = tracks.filter(path => pathInfo(maze, path, x1, y1));
+
+      // console.log('After 2nd filter: ',tracksInfo);
+
+      for(let j = 0; j < tracks.length; j++){
+        if(finishCheck(x1,y1,x2,y2,tracks[j])) return tracks[j];
+      }
+  }
+
+  console.log('Ligit track not found: ',tracks);
+
+  // if(!trackValidator(track))
+  //   return '';
+  // if((Math.abs(x2 - x1) === 1 && y1 === y2) ||
+  //    (Math.abs(y2 - y1) === 1 && x1 === x2))
+  //       return track;
+  // let path = [];
+  // if(y1 && maze[y1 - 1][x1] === '0')
+  //   path.push(setTrack(maze, x1, y1 - 1, x2, y2, track + 'N'));
+  // if(y1 < 25 && maze[y1 + 1][x1] === '0')
+  //   path.push(setTrack(maze, x1, y1 + 1, x2, y2, track + 'S'));
+  // if(x1 && maze[y1][x1 - 1] === '0')
+  //   path.push(setTrack(maze,x1 - 1, y1, x2, y2, track + 'W'));
+  // if(x1 < 39 && maze[y1][x1 + 1] === '0')
+  //   path.push(setTrack(maze,x1 + 1, y1, x2, y2, track + 'E'));
+  // if(!path.length)  return '';
+  // if(path.length === 1) return path[0];
+  // return path.filter(el=>el).sort((a,b)=>(a[1] - b[1]))[0];
 }
 
 function blockHandler(maze,setMaze, player, x2, y2){
   let x = player.x;
   let y = player.y;
   let maze2D = maze.map(el=>el.split(''));
-  const path = setTrack([...maze2D], player.x, player.y, x2, y2);
-  maze2D = maze.map(el=>el.split(''));
-  console.log(path[1],path[2]);
-  for(let i = 0; i < path[2].length; i++){
-    switch(path[2][i]){
+  const path = setTrack(maze2D, player.x, player.y, x2, y2, 1);
+  if(path === undefined)  return;
+  console.log('path: ',path);
+  for(let i = 0; i < path.length; i++){
+    switch(path[i]){
       case 'N': y--;  break;
       case 'S': y++;  break;
       case 'W': x--;  break;
@@ -34,7 +111,7 @@ function blockHandler(maze,setMaze, player, x2, y2){
     }
     maze2D[y][x] = '*';
   }
-  setMaze(maze2D.map(el=>el.join('')));
+  setMaze(maze2D.map(el=>el.join('').replace(/[+]/g,'0')));
 }
 function blockOutHandler(maze,setMaze){
   setMaze(maze.map(line => line.replace(/[*]/g,'0')));
