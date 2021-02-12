@@ -1,37 +1,31 @@
 import React from 'react';
-import IconSquareFill from "../Icons/IconSquareFill";
 import "../CSS/gameField.css";
+
+function direct(x, y, c){
+     switch(c){
+      case 'N': return [x,y-1];
+      case 'S': return [x,y+1];
+      case 'W': return [x-1,y];
+      case 'E': return [x+1,y];
+    }
+}
 
 function pathCheck(maze, path, xBegin, yBegin){
   let x = xBegin;
   let y = yBegin;
-  let trace = [];
   for(let i = 0; i < path.length; i++){
-    trace.push(x + ':' + y);
-     switch(path[i]){
-      case 'N': y--;  break;
-      case 'S': y++;  break;
-      case 'W': x--;  break;
-      case 'E': x++;  break;
-    }
-
-    if(trace.includes(x + ':' + y) ||  x < 0 || y < 0 || x > 39 || y > 25 ||
+    [x,y]=direct(x, y, path[i]);
+    if( x < 0 || y < 0 || x > 39 || y > 25 ||
       (maze[y][x]!=='0' && maze[y][x]!=='+')) return false;
   }
-  if(maze[y][x]==='+')  {console.log('track-filter'); return false;}
+  if(maze[y][x]==='+')  return false;
   maze[y][x] = '+';
   return true;
 }
 
 function finishCheck(x1, y1, x2, y2, path){
-  for(let i = 0; i < path.length; i++){
-     switch(path[i]){
-      case 'N': y1--;  break;
-      case 'S': y1++;  break;
-      case 'W': x1--;  break;
-      case 'E': x1++;  break;
-    }
-  }
+  for(let i = 0; i < path.length; i++)
+    [x1, y1] = direct(x1, y1, path[i]);
   return (x1 === x2 && y1 === y2);
 }
 
@@ -56,14 +50,9 @@ function blockHandler(maze,setMaze, player, x2, y2){
   let maze2D = maze.map(el=>el.split(''));
   const path = setTrack(maze2D, player.x, player.y, x2, y2, 1);
   if(path === undefined)  return;
-  console.log('path: ',path);
+
   for(let i = 0; i < path.length; i++){
-    switch(path[i]){
-      case 'N': y--;  break;
-      case 'S': y++;  break;
-      case 'W': x--;  break;
-      case 'E': x++;  break;
-    }
+    [x,y]=direct(x, y, path[i]);
     maze2D[y][x] = '*';
   }
   setMaze(maze2D.map(el=>el.join('').replace(/[+]/g,'0')));
@@ -82,7 +71,6 @@ function GameField(props) {
   for(let i = 1; i < 27; i++){
     let newLine = Array(42).fill(<td id='gPix'> </td>);
 
-    //newLine[1] = <td id='gStart'>.</td>;
     for(let j = 0; j < 40; j++){
       if( i <= maze.length && '*0'.includes(maze[i - 1][j])) {
         if(j===0) tdId = 'gStart';
@@ -95,12 +83,8 @@ function GameField(props) {
                                onMouseOut={()=>blockOutHandler(maze, setMaze)}>
                               {space}
                            </td>;
-
-
       }
-      //newLine.push(<td id='gClear'>0</td>);
     }
-    //newLine[40] = <td id='gEnd'> </td>;
 
     blockBar[i] = <tr>{newLine}</tr>;
   }
