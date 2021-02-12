@@ -38,46 +38,16 @@ function finishCheck(x1, y1, x2, y2, path){
 function setTrack(maze, x1, y1, x2, y2){
   let tracks = [''];
   const d = ['N','S','W','E'];
-  let tracksInfo = [];
 
   for(let i = 0; i < 100 && tracks.length; i++){
       tracks = Array(tracks.length * 4).fill('')
-            .map((_,i)=>tracks[~~(i/4)]+d[i%4]);
+            .map((_,i)=>tracks[~~(i/4)]+d[i%4]); // Generate tracking routes
 
-     console.log('Before filter: ',tracks);
+      tracks = tracks.filter(path => pathCheck(maze, path, x1, y1)); // Filter out useless ways
 
-      tracks = tracks.filter(path => pathCheck(maze, path, x1, y1));
-
-      console.log('After 1st filter: ',tracks);
-
-     //  tracksInfo = tracks.filter(path => pathInfo(maze, path, x1, y1));
-
-      // console.log('After 2nd filter: ',tracksInfo);
-
-      for(let j = 0; j < tracks.length; j++){
+      for(let j = 0; j < tracks.length; j++)     // Find the successful way
         if(finishCheck(x1,y1,x2,y2,tracks[j])) return tracks[j];
-      }
   }
-
-  console.log('Ligit track not found: ',tracks);
-
-  // if(!trackValidator(track))
-  //   return '';
-  // if((Math.abs(x2 - x1) === 1 && y1 === y2) ||
-  //    (Math.abs(y2 - y1) === 1 && x1 === x2))
-  //       return track;
-  // let path = [];
-  // if(y1 && maze[y1 - 1][x1] === '0')
-  //   path.push(setTrack(maze, x1, y1 - 1, x2, y2, track + 'N'));
-  // if(y1 < 25 && maze[y1 + 1][x1] === '0')
-  //   path.push(setTrack(maze, x1, y1 + 1, x2, y2, track + 'S'));
-  // if(x1 && maze[y1][x1 - 1] === '0')
-  //   path.push(setTrack(maze,x1 - 1, y1, x2, y2, track + 'W'));
-  // if(x1 < 39 && maze[y1][x1 + 1] === '0')
-  //   path.push(setTrack(maze,x1 + 1, y1, x2, y2, track + 'E'));
-  // if(!path.length)  return '';
-  // if(path.length === 1) return path[0];
-  // return path.filter(el=>el).sort((a,b)=>(a[1] - b[1]))[0];
 }
 
 function blockHandler(maze,setMaze, player, x2, y2){
