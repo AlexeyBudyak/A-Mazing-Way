@@ -12,7 +12,7 @@ function Language(props) {
         Language &nbsp;
        <select id='lang' onChange={()=>lgHandler()}>
          {lgTitles.map((el,i) =>
-            <option value={el} id={el} select={(i === lg)+''} >{el}</option>)}
+            <option value={el} id={el} key={el} select={(i === lg)+''} >{el}</option>)}
       </select>
     </div>
   );

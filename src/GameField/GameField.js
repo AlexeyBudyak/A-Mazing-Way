@@ -79,7 +79,7 @@ function GameField(props) {
           space = maze[i - 1][j] === '0' ? '' : '*';
           if(player.x === j && player.y === i - 1)  space = player.skin;
 
-          newLine[j + 1] = <td id={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, j, i - 1)}
+          newLine[j + 1] = <td key={i*100+j} id={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, j, i - 1)}
                                onMouseOut={()=>blockOutHandler(maze, setMaze)}>
                               {space}
                            </td>;
