@@ -1,10 +1,11 @@
 import React from 'react';
 import Language from "./Language";
 import QCount from "./QCount";
+import Skin from "./Skin";
 
 
 function Title(props) {
-  const {lg, setLg} = props;
+  const {lg, setLg, player, setPlayer} = props;
   return (
     <div className="alert alert-primary" role="alert">
 
@@ -16,7 +17,7 @@ function Title(props) {
           <div className="col">
 
             <button type="button" className="btn btn-primary">Start</button>
-
+            <Skin lg={lg} player={player} setPlayer={setPlayer}/>
           </div>
 
           <div className="col">

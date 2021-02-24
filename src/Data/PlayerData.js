@@ -1,5 +1,5 @@
 
-function playerDate(props) {
+function playerDate() {
   const date = {
     x: 0,
     y: 13,

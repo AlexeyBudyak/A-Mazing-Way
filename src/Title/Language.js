@@ -1,4 +1,5 @@
 import React from 'react';
+import lgData from "../Data/LanguageData";
 
 function Language(props) {
   const {lg,setLg}  = props;
@@ -9,7 +10,7 @@ function Language(props) {
     }
   return (
     <div>
-        Language &nbsp;
+        {lgData(lg).Language} &nbsp;
        <select id='lang' onChange={()=>lgHandler()}>
          {lgTitles.map((el,i) =>
             <option value={el} id={el} key={el} select={(i === lg)+''} >{el}</option>)}

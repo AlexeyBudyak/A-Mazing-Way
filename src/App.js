@@ -10,7 +10,7 @@ function App() {
   const [maze, setMaze] = useState(mazeData(0));
   return (
     <div>
-      <Title lg = {lg} setLg = {setLg} />
+      <Title lg = {lg} setLg = {setLg} player = {player} setPlayer = {setPlayer}/>
 
       <div className="container">
 
