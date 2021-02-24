@@ -2,7 +2,7 @@ import React from 'react';
 import Language from "./Language";
 import QCount from "./QCount";
 import Skin from "./Skin";
-
+import lgData from "../Data/LanguageData";
 
 function Title(props) {
   const {lg, setLg, player, setPlayer} = props;
@@ -16,7 +16,7 @@ function Title(props) {
           </div>
           <div className="col">
 
-            <button type="button" className="btn btn-primary">Start</button>
+            <button type="button" className="btn btn-primary">{lgData(lg).Start}</button>
             <Skin lg={lg} player={player} setPlayer={setPlayer}/>
           </div>
 
