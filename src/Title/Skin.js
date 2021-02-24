@@ -6,7 +6,7 @@ function Skin(props) {
   const skins = ['🙂', '😎','🤠','🐶','😺'];
 
     function skinHandler() {
-      //setPlayer(skins.indexOf(document.getElementById("skin").value));
+      setPlayer({...player, skin: document.getElementById("skin").value});
     }
   return (
     <div>
