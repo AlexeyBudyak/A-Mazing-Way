@@ -63,13 +63,13 @@ function blockOutHandler(maze,setMaze){
 
 function GameField(props) {
   const {maze, setMaze, player, setPlayer} = props;
-  const blockLine = Array(42).fill(<td id='gPix'> </td>);
-  const blockBar = Array(28).fill(<tr>{blockLine}</tr>);
+  const blockLine = Array(42).fill(0).map((_,i)=><td id='gPix' key={'bL'+i}> </td>);
+  const blockBar = Array(28).fill(0).map((_,i)=><tr key={'bB'+i}>{blockLine}</tr>);
   let tdId;
   let space;
 
   for(let i = 1; i < 27; i++){
-    let newLine = Array(42).fill(<td id='gPix'> </td>);
+    let newLine = Array(42).fill(0).map((_,i)=><td id='gPix' key={'nL'+i}> </td>);
 
     for(let j = 0; j < 40; j++){
       if( i <= maze.length && '*0'.includes(maze[i - 1][j])) {
@@ -86,7 +86,7 @@ function GameField(props) {
       }
     }
 
-    blockBar[i] = <tr>{newLine}</tr>;
+    blockBar[i] = <tr key={'bB'+i}>{newLine}</tr>;
   }
   return (
     <div >

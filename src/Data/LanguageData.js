@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 function lgData(lg = 0) {
   const captions = [
     {   //  English

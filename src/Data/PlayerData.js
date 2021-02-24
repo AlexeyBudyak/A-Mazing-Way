@@ -1,5 +1,3 @@
-import React from 'react';
-
 function playerDate(props) {
   const date = {
     x: 0,
