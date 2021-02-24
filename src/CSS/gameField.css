@@ -1,29 +1,31 @@
-#gField {
+.gField {
   border: 0px;
   font-size: 18px;
   text-align: center;
 }
-#gPix{
+.gPix{
   width: 20px;
   height: 20px;
-  color:yellow;
   background-color:DodgerBlue;
 }
-#gClear{
+.gClear{
   width: 24px;
   color: black;
   background-color:White;
   font-size: 12px;
 }
-#gStart{
+.gStart{
   width: 24px;
   color: black;
   background-color: Aquamarine;
   font-size: 12px;
 }
-#gEnd{
+.gEnd{
   width: 24px;
   color: black;
   background-color:LightGreen;
   font-size: 12px;
+}
+.player{
+  font-size: 18px;
 }

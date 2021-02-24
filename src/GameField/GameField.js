@@ -64,13 +64,13 @@ function blockOutHandler(maze,setMaze){
 
 function GameField(props) {
   const {maze, setMaze, player, setPlayer} = props;
-  const blockLine = Array(42).fill(0).map((_,i)=><td id='gPix' key={'bL'+i}> </td>);
+  const blockLine = Array(42).fill(0).map((_,i)=><td className='gPix' key={'bL'+i}> </td>);
   const blockBar = Array(28).fill(0).map((_,i)=><tr key={'bB'+i}>{blockLine}</tr>);
   let tdId;
   let space;
 
   for(let i = 1; i < 27; i++){
-    let newLine = Array(42).fill(0).map((_,i)=><td id='gPix' key={'nL'+i}> </td>);
+    let newLine = Array(42).fill(0).map((_,i)=><td className='gPix' key={'nL'+i}> </td>);
 
     for(let j = 0; j < 40; j++){
       if( i <= maze.length && '*0'.includes(maze[i - 1][j])) {
@@ -78,9 +78,9 @@ function GameField(props) {
             else  if(j === 39)  tdId = 'gEnd';
                         else    tdId = 'gClear';
           space = maze[i - 1][j] === '0' ? '' : '*';
-          if(player.x === j && player.y === i - 1)  space = player.skin;
+          if(player.x === j && player.y === i - 1)  {space = player.skin; tdId+=' player';}
 
-          newLine[j + 1] = <td key={i*100+j} id={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, j, i - 1)}
+          newLine[j + 1] = <td key={i*100+j} className={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, j, i - 1)}
                                onMouseOut={()=>blockOutHandler(maze, setMaze)}>
                               {space}
                            </td>;
@@ -91,7 +91,7 @@ function GameField(props) {
   }
   return (
     <div >
-      <table id = 'gField'>
+      <table className = 'gField'>
         <tbody>
 
           {blockBar}
