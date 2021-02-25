@@ -2,7 +2,7 @@ import React from 'react';
 import lgData from "../Data/LanguageData";
 
 function Skin(props) {
-  const {lg, player, setPlayer}  = props;
+  const {player, setPlayer}  = props;
   const skins = ['🙂', '😎','🤠','🐶','😺'];
 
     function skinHandler() {
@@ -10,7 +10,7 @@ function Skin(props) {
     }
   return (
     <div>
-      {lgData(lg).Skin}  &nbsp;
+      {lgData(player.lg).Skin}  &nbsp;
        <select id='skin' onChange={()=>skinHandler()}>
          {skins.map((el,i) =>
             <option value={el} id={el} key={el} select={(skins[i] === player.skin)+''} >{el}</option>)}

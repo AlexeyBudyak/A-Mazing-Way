@@ -5,7 +5,8 @@ function playerDate() {
     y: 13,
     level: 0,
     lg: 0,
-    skin: '🙂'
+    skin: '🙂',
+    path: '',
   }
   return date;
 }

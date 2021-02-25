@@ -5,7 +5,7 @@ import Skin from "./Skin";
 import lgData from "../Data/LanguageData";
 
 function Title(props) {
-  const {lg, setLg, player, setPlayer} = props;
+  const {player, setPlayer} = props;
   return (
     <div className="alert alert-primary" role="alert">
 
@@ -16,13 +16,13 @@ function Title(props) {
           </div>
           <div className="col">
 
-            <button type="button" className="btn btn-primary">{lgData(lg).Start}</button>
-            <Skin lg={lg} player={player} setPlayer={setPlayer}/>
+            <button type="button" className="btn btn-primary">{lgData(player.lg).Start}</button>
+            <Skin player={player} setPlayer={setPlayer}/>
           </div>
 
           <div className="col">
-            <Language lg = {lg} setLg = {setLg}/>
-            <QCount lg = {lg} />
+            <Language player={player} setPlayer={setPlayer}/>
+            <QCount player = {player}/>
           </div>
         </div>
       </div>

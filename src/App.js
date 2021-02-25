@@ -6,11 +6,10 @@ import playerDate from "./Data/PlayerData";
 
 function App() {
   const [player, setPlayer] = useState(playerDate())
-  const [lg,setLg] = useState(0);
   const [maze, setMaze] = useState(mazeData(0));
   return (
     <div>
-      <Title lg = {lg} setLg = {setLg} player = {player} setPlayer = {setPlayer}/>
+      <Title player = {player} setPlayer = {setPlayer}/>
 
       <div className="container">
 

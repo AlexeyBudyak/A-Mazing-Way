@@ -3,12 +3,12 @@ import QAData from "../Data/QAData.js";
 import lgData from "../Data/LanguageData";
 
 function QCount(props) {
-  const {lg} = props;
-  const numQ = QAData(lg).reduce((sum,lvl)=> sum + lvl.length,0);
+  const {lg,player} = props;
+  const numQ = QAData(player.lg).reduce((sum,lvl)=> sum + lvl.length,0);
   return (
     <div>
-        <div>{lgData(lg).Questions}: {numQ}</div>
-        <div>{lgData(lg).HardestLevel}: {QAData(lg).length}</div>
+        <div>{lgData(player.lg).Questions}: {numQ}</div>
+        <div>{lgData(player.lg).HardestLevel}: {QAData(player.lg).length}</div>
     </div>
   );
 }
