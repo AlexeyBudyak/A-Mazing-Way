@@ -3,7 +3,7 @@ import lgData from "../Data/LanguageData";
 
 function Skin(props) {
   const {player, setPlayer}  = props;
-  const skins = ['🙂', '😎','🤠','🐶','😺'];
+  const skins = ['🙂', '😎','🤠','🐶','😺','🐻','🦊'];
 
     function skinHandler() {
       setPlayer({...player, skin: document.getElementById("skin").value});
