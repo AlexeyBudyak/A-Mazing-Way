@@ -23,22 +23,22 @@ function blockOutHandler(maze,setMaze){
 
 function GameField(props) {
   const {maze, setMaze, player, setPlayer} = props;
+  // filling everything with 'concrete' blocks
   const blockLine = Array(42).fill(0).map((_,i)=><td className='gPix' key={'bL'+i}> </td>);
   const blockBar = Array(28).fill(0).map((_,i)=><tr key={'bB'+i}>{blockLine}</tr>);
   let tdId;
   let space;
 
+  // Curving map in the concrete rectangle line by line
   for(let i = 1; i < 27; i++){
     let newLine = Array(42).fill(0).map((_,i)=><td className='gPix' key={'nL'+i}> </td>);
 
     for(let j = 0; j < 40; j++){
-      if( i <= maze.length && '*0'.includes(maze[i - 1][j])) {
-        if(j===0) tdId = 'gStart';
-            else  if(j === 39)  tdId = 'gEnd';
-                        else    tdId = 'gClear';
+      if( i <= maze.length && maze[i - 1][j]!=='1') {
+          tdId = !j ? 'gStart' : j === 39 ? 'gEnd' : 'gClear';
           space = maze[i - 1][j] === '0' ? '' : '*';
           if(player.x === j && player.y === i - 1)  {space = player.skin; tdId+=' player';}
-
+          if(player.devX === j && player.devY === i - 1)  {space = '👻'; }
           newLine[j + 1] = <td key={i*100+j} className={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, setPlayer, j, i - 1)}
                                onMouseOut={()=>blockOutHandler(maze, setMaze)}>
                               {space}
