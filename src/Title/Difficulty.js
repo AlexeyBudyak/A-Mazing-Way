@@ -3,12 +3,10 @@ import lgData from "../Data/LanguageData";
 
 function Difficulty(props) {
   const {player, setPlayer}  = props;
-  console.log(lgData(player.lg).diffLevels);
-  //const diffLevels = lgData(player.lg).diffLevels;
-  const diffLevels = ['Extra Easy (6 - 10 years old)', 'Easy (11 - 17 years old)', 'Normal (18-30 years old)', 'Hard (31 - 50 years old)', 'Extra Hard (51 - 90 years old)']
-
+  const diffLevels = lgData(player.lg).DiffLevels;
     function diffHandler() {
-      setPlayer({...player, difficluty: document.getElementById("difficluty").value});
+      setPlayer({...player, difficluty: diffLevels.indexOf(document.getElementById("difficluty").value)});
+      console.log(player);
     }
   return (
     <div>
