@@ -6,7 +6,6 @@ function Difficulty(props) {
   const diffLevels = lgData(player.lg).DiffLevels;
     function diffHandler() {
       setPlayer({...player, difficluty: diffLevels.indexOf(document.getElementById("difficluty").value)});
-      console.log(player);
     }
   return (
     <div>
