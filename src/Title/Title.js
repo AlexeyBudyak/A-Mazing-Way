@@ -3,6 +3,7 @@ import Language from "./Language";
 import QCount from "./QCount";
 import Skin from "./Skin";
 import lgData from "../Data/LanguageData";
+import Difficulty from "./Difficulty";
 
 function mazeStart(maze, setMaze, player, setPlayer){
   let devX, devY;
@@ -30,6 +31,7 @@ function Title(props) {
               {lgData(player.lg).Start}
             </button>
             <Skin player={player} setPlayer={setPlayer}/>
+            <Difficulty player={player} setPlayer={setPlayer}/>
           </div>
 
           <div className="col">
