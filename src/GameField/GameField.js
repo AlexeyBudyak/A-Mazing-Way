@@ -6,19 +6,21 @@ import setTrack from "./setTrack";
 function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   let x = player.x;
   let y = player.y;
-  let maze2D = maze.map(el=>el.split(''));
-  const path = setTrack(maze2D, player.x, player.y, x2, y2, 1);
+  // let maze2D = maze.map(el=>el.split(''));
+  const path = setTrack(maze, player.x, player.y, x2, y2, 1);
   if(path === undefined)  return;
 
   for(let i = 0; i < path.length; i++){
     [x,y]=direct(x, y, path[i]);
-    maze2D[y][x] = '*';
+    maze[y][x] = '*';
   }
-  setMaze(maze2D.map(el=>el.join('').replace(/[+]/g,'0')));
+  //setMaze(maze.map(el=>el.join('').replace(/[+]/g,'0')));
+  setMaze(maze.map(line=>line.map(el=> el === '+' ? '0' : el)));
   setPlayer({...player, path: path});
 }
 function blockOutHandler(maze,setMaze){
-  setMaze(maze.map(line => line.replace(/[*]/g,'0')));
+  // setMaze(maze.map(line => line.replace(/[*]/g,'0')));
+  setMaze(maze.map(line=>line.map(el=> el === '*' ? '0' : el)))
 }
 
 function GameField(props) {
