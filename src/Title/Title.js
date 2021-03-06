@@ -9,7 +9,6 @@ import mazeData from "../Data/MazaData";
 function qLevelGenerator(chance){
   let lvl = 0;
   while(chance > Math.random()*100 && lvl < 25) lvl++;
-  console.log(lvl)
   return String.fromCharCode(65 + lvl);
 }
 

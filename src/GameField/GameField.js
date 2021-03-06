@@ -36,6 +36,7 @@ function GameField(props) {
       if( i <= maze.length && maze[i - 1][j]!=='1') {
           tdId = !j ? 'gStart' : j === 39 ? 'gEnd' : 'gClear';
           space = maze[i - 1][j] === '0' ? '' : maze[i - 1][j];
+          if(/[A-Z]/.test(maze[i - 1][j]))  tdId+=' question';
           if(player.x === j && player.y === i - 1)  {space = player.skin; tdId+=' player';}
           if(player.devX === j && player.devY === i - 1)  {space = '👻'; }
           newLine[j + 1] = <td key={i*100+j} className={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, setPlayer, j, i - 1)}
