@@ -4,12 +4,22 @@ import QCount from "./QCount";
 import Skin from "./Skin";
 import lgData from "../Data/LanguageData";
 import Difficulty from "./Difficulty";
+import mazeData from "../Data/MazaData";
+
+function qLevelGenerator(chance){
+  let lvl = 0;
+  while(chance > Math.random()*100 && lvl < 25) lvl++;
+  console.log(lvl)
+  return String.fromCharCode(65 + lvl);
+}
 
 function questionsGenerator(maze, setMaze, player){
-  const chance = [5,15,30,50,75][player.difficluty];
+  const chanceAppear = [5,15,30,50,75][player.difficluty];
+  const chanceLevelIncrease = [30,40,50,75,90][player.difficluty];
+  maze = mazeData(0);
   setMaze(maze.map(line=>line
-    .map((el,i)=>el === '0' && Math.random()*100 < chance && i && i < 39 ? 'A' : el))
-  );
+    .map((el,i)=>el !== '0' || i === 0 || i === 39 || chanceAppear < Math.random(100) * 100 ? el :
+      qLevelGenerator(chanceLevelIncrease))));
 }
 
 function mazeStart(maze, setMaze, player, setPlayer){
