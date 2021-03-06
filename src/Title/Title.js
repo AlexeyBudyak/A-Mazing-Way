@@ -7,8 +7,8 @@ import Difficulty from "./Difficulty";
 
 function questionsGenerator(maze, setMaze, player){
   const chance = [5,15,30,50,75][player.difficluty];
-  setMaze(maze.map(line=>line.split('')
-    .map((el,i)=>el === '0' && Math.random()*100 < chance && i && i < 39 ? 'A' : el).join(''))
+  setMaze(maze.map(line=>line
+    .map((el,i)=>el === '0' && Math.random()*100 < chance && i && i < 39 ? 'A' : el))
   );
 }
 

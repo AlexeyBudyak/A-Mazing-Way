@@ -6,7 +6,6 @@ import setTrack from "./setTrack";
 function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   let x = player.x;
   let y = player.y;
-  // let maze2D = maze.map(el=>el.split(''));
   const path = setTrack(maze, player.x, player.y, x2, y2, 1);
   if(path === undefined)  return;
 
@@ -14,12 +13,10 @@ function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
     [x,y]=direct(x, y, path[i]);
     maze[y][x] = '*';
   }
-  //setMaze(maze.map(el=>el.join('').replace(/[+]/g,'0')));
   setMaze(maze.map(line=>line.map(el=> el === '+' ? '0' : el)));
   setPlayer({...player, path: path});
 }
 function blockOutHandler(maze,setMaze){
-  // setMaze(maze.map(line => line.replace(/[*]/g,'0')));
   setMaze(maze.map(line=>line.map(el=> el === '*' ? '0' : el)))
 }
 
@@ -38,7 +35,7 @@ function GameField(props) {
     for(let j = 0; j < 40; j++){
       if( i <= maze.length && maze[i - 1][j]!=='1') {
           tdId = !j ? 'gStart' : j === 39 ? 'gEnd' : 'gClear';
-          space = maze[i - 1][j] === '0' ? '' : '*';
+          space = maze[i - 1][j] === '0' ? '' : maze[i - 1][j];
           if(player.x === j && player.y === i - 1)  {space = player.skin; tdId+=' player';}
           if(player.devX === j && player.devY === i - 1)  {space = '👻'; }
           newLine[j + 1] = <td key={i*100+j} className={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, setPlayer, j, i - 1)}

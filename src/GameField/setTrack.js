@@ -33,6 +33,7 @@ function setTrack(maze, x1, y1, x2, y2){
       for(let j = 0; j < tracks.length; j++)     // Find the successful way
         if(finishCheck(x1,y1,x2,y2,tracks[j])) return tracks[j];
   }
+  return [];
 }
 
 export default setTrack;
