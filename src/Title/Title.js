@@ -15,23 +15,22 @@ function qLevelGenerator(chance){
 function questionsGenerator(maze, setMaze, player){
   const chanceAppear = [5,15,30,50,75][player.difficluty];
   const chanceLevelIncrease = [30,40,50,75,90][player.difficluty];
-  maze = mazeData(0);
-  setMaze(maze.map(line=>line
+  return (mazeData(0).map(line=>line
     .map((el,i)=>el !== '0' || i === 0 || i === 39 || chanceAppear < Math.random(100) * 100 ? el :
       qLevelGenerator(chanceLevelIncrease))));
 }
 
 function mazeStart(maze, setMaze, player, setPlayer){
-  questionsGenerator(maze, setMaze, player);
+  maze = questionsGenerator(maze, setMaze, player);
 
   let devX, devY;
   do {
     devX = 1 + ~~(Math.random()*38);
     devY = ~~(Math.random()*26);
   }while(maze[devY][devX]!=='0');
-
+  maze[devY][devX] = '👻';
   setPlayer({...player, x:0, y: 13, devX: devX, devY: devY, devActive: true});
-  console.log(player);
+  setMaze(maze);
 }
 function Title(props) {
   const {maze, setMaze, player, setPlayer} = props;
