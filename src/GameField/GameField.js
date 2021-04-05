@@ -20,8 +20,11 @@ function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   setMaze(maze.map(line=>line.map(el=> el === '+' ? '0' : el)));
   setPlayer({...player, path: path});
 }
-function blockOutHandler(maze,setMaze){
-  setMaze(maze.map(line=>line.map(el=> el === '*' ? '0' : el)))
+function blockOutHandler(maze,setMaze,player,setPlayer){
+  maze = maze.map(line=>line.map(el=> el === '*' ? '0' : el));
+  maze[player.target.y][player.target.x] = player.target.pic;
+  setMaze(maze);
+  setPlayer({...player, target: {active:false}});
 }
 
 function GameField(props) {
@@ -43,7 +46,7 @@ function GameField(props) {
           if(/[A-Z]/.test(maze[i - 1][j]))  tdId+=' question';
           if(player.x === j && player.y === i - 1)  {space = player.skin; tdId+=' player';}
           newLine[j + 1] = <td key={i*100+j} className={tdId} onMouseOver={()=>blockHandler(maze, setMaze, player, setPlayer, j, i - 1)}
-                               onMouseOut={()=>blockOutHandler(maze, setMaze)}>
+                               onMouseOut={()=>blockOutHandler(maze, setMaze, player, setPlayer)}>
                               {space}
                            </td>;
       }
