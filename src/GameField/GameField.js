@@ -9,13 +9,12 @@ function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   console.log('target: ',maze[y2][x2]);
   player = {...player, target: {x:x2, y: y2, pic : maze[y2][x2],active:true}}
   console.log(player.target);
-  maze[y2][x2] = '0';
+  if(maze[y2][x2]!=='0')  maze[y2][x2] = '0';
   const path = setTrack(maze, player.x, player.y, x2, y2, 1);
-  if(path === undefined)  return;
-
-  for(let i = 0; i < path.length; i++){
+  if(!path.length)  maze[y2][x2] = player.target.pic;
+  else for(let i = 0; i < path.length; i++){
     [x,y]=direct(x, y, path[i]);
-    maze[y][x] = '*';
+    maze[y][x] = i < path.length -1 ? '*' : '⚔️';
   }
   setMaze(maze.map(line=>line.map(el=> el === '+' ? '0' : el)));
   setPlayer({...player, path: path});
