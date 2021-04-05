@@ -8,6 +8,7 @@ function playerDate() {
     skin: '🙂',
     path: '',
     difficluty: 2,
+    //target: {x:0,y:0,pic:'',active:false}
   }
   return date;
 }

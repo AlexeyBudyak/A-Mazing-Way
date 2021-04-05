@@ -6,7 +6,7 @@ import playerDate from "./Data/PlayerData";
 
 function App() {
   const [player, setPlayer] = useState(playerDate())
-  const [maze, setMaze] = useState(mazeData(0));
+  let [maze, setMaze] = useState(mazeData(0));
   return (
     <div>
       <Title maze={maze} setMaze={setMaze} player = {player} setPlayer = {setPlayer}/>

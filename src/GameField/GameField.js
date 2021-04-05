@@ -6,6 +6,10 @@ import setTrack from "./setTrack";
 function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   let x = player.x;
   let y = player.y;
+  console.log('target: ',maze[y2][x2]);
+  player = {...player, target: {x:x2, y: y2, pic : maze[y2][x2],active:true}}
+  console.log(player.target);
+  maze[y2][x2] = '0';
   const path = setTrack(maze, player.x, player.y, x2, y2, 1);
   if(path === undefined)  return;
 
