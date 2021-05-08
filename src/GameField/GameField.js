@@ -3,10 +3,14 @@ import "../CSS/gameField.css";
 import direct from "./direct.js";
 import setTrack from "./setTrack";
 
+function runHandler(maze,setMaze, player, setPlayer, x2, y2){
+  console.log(player.target.pic, player.path)
+}
+
 function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   let x = player.x;
   let y = player.y;
-  player = {...player, target: {x:x2, y: y2, pic : maze[y2][x2],active:true}}
+  player = {...player, target: {x:x2, y: y2, pic : maze[y2][x2],active:false}}
   if(maze[y2][x2]!=='0')  maze[y2][x2] = '0';
   const path = setTrack(maze, player.x, player.y, x2, y2, 1);
   if(!path.length)  maze[y2][x2] = player.target.pic;
@@ -21,7 +25,6 @@ function blockOutHandler(maze,setMaze,player,setPlayer){
   maze = maze.map(line=>line.map(el=> el === '*' ? '0' : el));
   maze[player.target.y][player.target.x] = player.target.pic;
   setMaze(maze);
-  setPlayer({...player, target: {active:false}});
 }
 
 function GameField(props) {
@@ -49,7 +52,9 @@ function GameField(props) {
           }
           newLine[j + 1] = <td key={i * 100 + j} className={tdId}
                                onMouseOver={() => blockHandler(maze, setMaze, player, setPlayer, j, i - 1)}
-                               onMouseOut={() => blockOutHandler(maze, setMaze, player, setPlayer)}>
+                               onMouseOut={() => blockOutHandler(maze, setMaze, player, setPlayer)}
+                               onClick={() => runHandler(maze, setMaze, player, setPlayer, j, i - 1)}
+          >
             {space}
           </td>;
         }
