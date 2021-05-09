@@ -1,16 +1,18 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import "../CSS/gameField.css";
 import direct from "./direct.js";
 import setTrack from "./setTrack";
 
 function runHandler(maze,setMaze, player, setPlayer, x2, y2){
-  console.log(player.target.pic, player.path)
+  setPlayer({...player, target:{...player.target, active: true}});
+
 }
 
 function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   let x = player.x;
   let y = player.y;
-  player = {...player, target: {x:x2, y: y2, pic : maze[y2][x2],active:false}}
+
+  player = {...player, target: {...player.target,x:x2, y: y2, pic : maze[y2][x2]}}
   if(maze[y2][x2]!=='0')  maze[y2][x2] = '0';
   const path = setTrack(maze, player.x, player.y, x2, y2, 1);
   if(!path.length)  maze[y2][x2] = player.target.pic;
@@ -30,6 +32,14 @@ function blockOutHandler(maze,setMaze,player,setPlayer){
 function GameField(props) {
   const {maze, setMaze, player, setPlayer} = props;
 
+    const [seconds, setSeconds] = useState(0);
+    useEffect(() => {
+      let interval = null;
+      interval = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 200);
+         return () => clearInterval(interval);
+    }, [seconds]);
 
     // filling everything with 'concrete' blocks
     const blockLine = Array(42).fill(0).map((_, i) => <td className='gPix' key={'bL' + i}></td>);
