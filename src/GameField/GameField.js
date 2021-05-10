@@ -34,12 +34,13 @@ function GameField(props) {
 
     const [seconds, setSeconds] = useState(0);
     useEffect(() => {
+      console.log('*')
       let interval = null;
       interval = setInterval(() => {
         setSeconds(seconds => seconds + 1);
       }, 200);
          return () => clearInterval(interval);
-    }, [seconds]);
+    }, [seconds * player.target.active]);
 
     // filling everything with 'concrete' blocks
     const blockLine = Array(42).fill(0).map((_, i) => <td className='gPix' key={'bL' + i}></td>);
