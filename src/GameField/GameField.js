@@ -9,6 +9,7 @@ function runHandler(maze,setMaze, player, setPlayer, x2, y2){
 }
 
 function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
+  if(player.target.active)  return;
   let x = player.x;
   let y = player.y;
 
@@ -24,22 +25,25 @@ function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
   setPlayer({...player, path: path});
 }
 function blockOutHandler(maze,setMaze,player,setPlayer){
+  if(player.target.active)  return;
   maze = maze.map(line=>line.map(el=> el === '*' ? '0' : el));
   maze[player.target.y][player.target.x] = player.target.pic;
   setMaze(maze);
 }
-
+function runningStep(){
+  console.log('*')
+}
 function GameField(props) {
   const {maze, setMaze, player, setPlayer} = props;
 
     const [seconds, setSeconds] = useState(0);
     useEffect(() => {
-      console.log('*')
+      runningStep();
       let interval = null;
       interval = setInterval(() => {
         setSeconds(seconds => seconds + 1);
       }, 200);
-         return () => clearInterval(interval);
+      return () => clearInterval(interval);
     }, [seconds * player.target.active]);
 
     // filling everything with 'concrete' blocks
