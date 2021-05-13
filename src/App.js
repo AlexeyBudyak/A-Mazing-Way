@@ -5,7 +5,7 @@ import mazeData from "./Data/MazaData";
 import playerDate from "./Data/PlayerData";
 
 function App() {
-  const [player, setPlayer] = useState(playerDate())
+  let [player, setPlayer] = useState(playerDate())
   let [maze, setMaze] = useState(mazeData(0));
   return (
     <div>

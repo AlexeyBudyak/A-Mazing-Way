@@ -5,7 +5,6 @@ import setTrack from "./setTrack";
 
 function runHandler(maze,setMaze, player, setPlayer, x2, y2){
   setPlayer({...player, target:{...player.target, active: true}});
-
 }
 
 function blockHandler(maze,setMaze, player, setPlayer, x2, y2){
@@ -30,19 +29,30 @@ function blockOutHandler(maze,setMaze,player,setPlayer){
   maze[player.target.y][player.target.x] = player.target.pic;
   setMaze(maze);
 }
-function runningStep(){
-  console.log('*')
+
+function runningStep(maze, setMaze, player, setPlayer){
+  if(!player.path.length) {
+    player.target.active = false;
+    setPlayer(player);
+    return;
+  }
+  maze[player.y][player.x] = '0';
+  setMaze(maze);
+  [player.x, player.y] = direct(player.x, player.y, player.path[0]);
+  player.path = player.path.slice(1);
+  if(player.path === '') player.target.active = false;
+  setPlayer(player);
 }
 function GameField(props) {
   const {maze, setMaze, player, setPlayer} = props;
 
     const [seconds, setSeconds] = useState(0);
     useEffect(() => {
-      runningStep();
+      runningStep(maze, setMaze, player, setPlayer);
       let interval = null;
       interval = setInterval(() => {
         setSeconds(seconds => seconds + 1);
-      }, 200);
+      }, 50);
       return () => clearInterval(interval);
     }, [seconds * player.target.active]);
 
